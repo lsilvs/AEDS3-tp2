@@ -7,8 +7,8 @@
 
 int prog_din(char * palavra) {
 	int j, k, l, length;
-	int dp[2][5001];
-	memset(dp, 0, sizeof dp);   
+	int array[2][5001];
+	memset(array, 0, sizeof array);   
     length = strlen(palavra);
 
 
@@ -16,12 +16,12 @@ int prog_din(char * palavra) {
         char ch = palavra[j];
         for (k = 0; k < length; k++)
             if (ch == palavra[k])
-                dp[1][k+1] = dp[0][k]+1;
+                array[1][k+1] = array[0][k]+1;
             else 
-            	dp[1][k+1] = max(dp[1][k], dp[0][k+1]);
+            	array[1][k+1] = max(array[1][k], array[0][k+1]);
 
         for (l = 0; l <= length; l++)
-            dp[0][l] = dp[1][l];
+            array[0][l] = array[1][l];
     }
-    return (length - dp[1][k]);
+    return (length - array[1][k]);
 }
