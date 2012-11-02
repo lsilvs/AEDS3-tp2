@@ -14,7 +14,7 @@ VALGRIND = valgrind --tool=memcheck --leak-check=yes --show-reachable=yes
 
 #arquivos
 INPUTFILE = input.txt
-INPUTFILETEST = doc/test/input_up.txt
+INPUTFILETEST = doc/test/input.txt
 OUTPUTFILE = output.txt
 OUTPUTFILETEST = doc/test/output.txt
 
@@ -25,7 +25,6 @@ clean:
 
 run:
 	make
-	clear
 	./$(APPNAME) $(INPUTFILE) $(OUTPUTFILE)
 
 test:

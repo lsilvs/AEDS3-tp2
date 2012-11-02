@@ -28,27 +28,98 @@ int prog_din(char * palavra) {
 }
 
 
+inline int primeira_ocor_rev(char letra, char *palavra_rev, int R)
+{
+    int i;
+
+    for (i = R+1; i<strlen(palavra_rev); i++)
+    {
+        if (letra == palavra_rev[i])
+        {
+            return(i);
+        }
+
+    }
+
+    return(-1);
+}
+
 int prog_gul(char * palavra) {
-	int *best, *prev, i, j, max = 0;
-	int length = strlen(palavra);
-	best = (int*) malloc ( sizeof( int ) * length );
-	prev = (int*) malloc ( sizeof( int ) * length );
 
-	for ( i = 0; i < length; i++ ) best[i] = 1, prev[i] = i;
+    int I, R=-1, length, fixas=0; int ocor_aux1, ocor_aux2;
+    char *palavra_rev = malloc(sizeof(char)*5001);
 
-	for ( i = 1; i < length; i++ )
-	  for ( j = 0; j < i; j++ )
-	     if ( palavra[i] > palavra[j] && best[i] < best[j] + 1 )
-	        best[i] = best[j] + 1, prev[i] = j;
+    length=strlen(palavra);
 
-	for ( i = 0; i < length; i++ )
-	  if ( max < best[i] )
-	     max = best[i];
+    //reverso da palavra
+    int j = strlen(palavra)-1, i;
+    for(i=0; i<strlen(palavra); i++)
+    {
+        palavra_rev[j] = palavra[i];
+        j--;
+    }
 
-	free( best );
-	free( prev );
+    //percorrer a palavra comparando com seu reverso
+    for (I=0; I<length; I++)
+    {
+        //verifica se ja chegou no final do reverso
+        if(R<length-1)
+        {
+            if (I < length-2)
+            {
+                ocor_aux1 = primeira_ocor_rev(palavra[I], palavra_rev, R);
+                ocor_aux2 = primeira_ocor_rev(palavra[I+1], palavra_rev, R);
 
-	return (length - max);
+
+                //salva ocorrencia em R
+
+                //duas letras acima de R
+                if (ocor_aux1 > R && ocor_aux2 > R)
+                {
+                    if (ocor_aux1 < ocor_aux2){
+                        R = ocor_aux1; fixas += 1;
+                    }
+                    else if (ocor_aux1 > ocor_aux2){
+                        R = ocor_aux2; fixas += 1; I++;
+                    }
+                    else if (ocor_aux1 == ocor_aux2)
+                    {
+                        R = ocor_aux1; fixas += 1;
+                    }
+                }
+                //primeira letras acima de R
+                else if (ocor_aux1 > R)
+                {
+                    R = ocor_aux1; fixas += 1;
+                }
+                //segunda letras acima de R
+                else if (ocor_aux2 > R)
+                {
+                    R = ocor_aux2; fixas += 1; I++;
+                }
+
+            }
+            //so tem uma letra para comparar (ultima execucao)
+            else
+            {
+                ocor_aux1 = primeira_ocor_rev(palavra[I], palavra_rev, R);
+                if(ocor_aux1 != -1)
+                {
+                    R = ocor_aux1;
+                    fixas += 1;
+                }
+            }
+
+        }
+        else
+        {
+            break;
+        }
+
+    }
+free(palavra_rev);
+
+return (length - fixas);
 }
 
 
