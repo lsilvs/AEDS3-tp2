@@ -5,4 +5,6 @@
 
 int prog_din(char * palavra);
 
+int prog_gul(char * palavra);
+
 #endif

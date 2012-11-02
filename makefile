@@ -14,7 +14,9 @@ VALGRIND = valgrind --tool=memcheck --leak-check=yes --show-reachable=yes
 
 #arquivos
 INPUTFILE = input.txt
+INPUTFILETEST = doc/test/input_up.txt
 OUTPUTFILE = output.txt
+OUTPUTFILETEST = doc/test/output.txt
 
 release: ; $(GCC) $(OPTMIZE) $(LIBS) $(OBJS) -o $(APPNAME)
 
@@ -27,8 +29,10 @@ run:
 	./$(APPNAME) $(INPUTFILE) $(OUTPUTFILE)
 
 test:
-	make run
-	diff $(OUTPUTFILE) $(OUTPUTTEST)
+	make
+	clear
+	./$(APPNAME) $(INPUTFILETEST) $(OUTPUTFILE)
+	diff $(OUTPUTFILE) $(OUTPUTFILETEST)
 
 time:
 	make

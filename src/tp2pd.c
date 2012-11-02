@@ -6,7 +6,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "funcoes.h"
 
 inline int max(int a, int b) {
@@ -19,8 +18,7 @@ int main(int argc, char *argv[]) {
 	char * outputFileName = argv[2];
 	int numPalavras, i, j, k, l, length;
 	char palavra[5001];
-	int dp[2][5001];
-
+	
 	// Abrir arquivo de entrada
 	FILE * inputFileOpen;
 	if ((inputFileOpen = fopen(inputFileName, "r")) == NULL) {
@@ -40,7 +38,7 @@ int main(int argc, char *argv[]) {
 		// Lê a palavra
 		fscanf(inputFileOpen, "%s", &palavra);
 		
-		fprintf(outputFileOpen, "%d\n", prog_din(palavra));
+		fprintf(outputFileOpen, "%d\n", prog_gul(palavra));
 		
 	}
 
