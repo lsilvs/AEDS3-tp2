@@ -23,5 +23,5 @@ int prog_din(char * palavra) {
         for (l = 0; l <= length; l++)
             dp[0][l] = dp[1][l];
     }
-    printf("%d\n", (length - dp[1][k]));
+    return (length - dp[1][k]);
 }
