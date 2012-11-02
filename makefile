@@ -4,10 +4,12 @@ OPTMIZE = -g3 -O3
 LIBS = -lc
 
 #Objetos
-OBJS =  src/tp2pd.c src/funcoes.c 
+OBJS1 =  src/tp2pd.c src/funcoes.c
+OBJS2 =  src/tp2g.c src/funcoes.c
 
 # Nome do aplicativo
-APPNAME = tp2pd
+APPNAME1 = tp2pd
+APPNAME2 = tp2g
 
 #valgrind
 VALGRIND = valgrind --tool=memcheck --leak-check=yes --show-reachable=yes
@@ -15,28 +17,31 @@ VALGRIND = valgrind --tool=memcheck --leak-check=yes --show-reachable=yes
 #arquivos
 INPUTFILE = input.txt
 INPUTFILETEST = doc/test/input.txt
-OUTPUTFILE = output.txt
+OUTPUTFILE1 = output1.txt
+OUTPUTFILE2 = output2.txt
 OUTPUTFILETEST = doc/test/output.txt
 
-release: ; $(GCC) $(OPTMIZE) $(LIBS) $(OBJS) -o $(APPNAME)
+release: ; $(GCC) $(OPTMIZE) $(LIBS) $(OBJS1) -o $(APPNAME1)
+	$(GCC) $(OPTMIZE) $(LIBS) $(OBJS2) -o $(APPNAME2)
 
 clean:
-	rm -f $(APPNAME) $(OUTPUTFILE)
+	rm -f $(APPNAME1) $(APPNAME2) $(OUTPUTFILE1) $(OUTPUTFILE2)
 
 run:
 	make
-	./$(APPNAME) $(INPUTFILE) $(OUTPUTFILE)
+	./$(APPNAME1) $(INPUTFILE) $(OUTPUTFILE1)
+	./$(APPNAME1) $(INPUTFILE) $(OUTPUTFILE2)
 
 test:
 	make
-	clear
-	./$(APPNAME) $(INPUTFILETEST) $(OUTPUTFILE)
-	diff $(OUTPUTFILE) $(OUTPUTFILETEST)
+	./$(APPNAME1) $(INPUTFILETEST) $(OUTPUTFILE1)
+	./$(APPNAME2) $(INPUTFILETEST) $(OUTPUTFILE2)
+	
 
 time:
 	make
-	time ./$(APPNAME) $(INPUTFILE) $(OUTPUTFILE)
+	time ./$(APPNAME1) $(INPUTFILE) $(OUTPUTFILE1)
 
 analysis:
 	make
-	$(VALGRIND) ./$(APPNAME) $(INPUTFILE) $(OUTPUTFILE)
+	$(VALGRIND) ./$(APPNAME1) $(INPUTFILE) $(OUTPUTFILE1)

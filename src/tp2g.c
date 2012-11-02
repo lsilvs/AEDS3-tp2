@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
 		// Lê a palavra
 		fscanf(inputFileOpen, "%s", palavra);
 		
-		fprintf(outputFileOpen, "%d\n", prog_din(palavra));
+		fprintf(outputFileOpen, "%d\n", prog_gul(palavra));
 		
 	}
 
