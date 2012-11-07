@@ -16,7 +16,7 @@ VALGRIND = valgrind --tool=memcheck --leak-check=yes --show-reachable=yes
 
 #arquivos
 INPUTFILE = input.txt
-INPUTFILETEST = dicionario.txt
+INPUTFILETEST = doc/test/luam/input
 OUTPUTFILE1 = output1.txt
 OUTPUTFILE2 = output2.txt
 OUTPUTFILETEST = doc/test/output.txt
