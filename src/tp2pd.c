@@ -1,7 +1,7 @@
 /*
 *	Problema do Palíndromo
 *		Autor: Lucas Silvestre (2010054665)
-*		Data: 09/10/2012
+*		Data: 02/11/2012
 */
 
 #include <stdio.h>
