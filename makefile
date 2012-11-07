@@ -16,7 +16,7 @@ VALGRIND = valgrind --tool=memcheck --leak-check=yes --show-reachable=yes
 
 #arquivos
 INPUTFILE = input.txt
-INPUTFILETEST = doc/test/input.txt
+INPUTFILETEST = dicionario.txt
 OUTPUTFILE1 = output1.txt
 OUTPUTFILE2 = output2.txt
 OUTPUTFILETEST = doc/test/output.txt
@@ -25,7 +25,7 @@ release: ; $(GCC) $(OPTMIZE) $(LIBS) $(OBJS1) -o $(APPNAME1)
 	$(GCC) $(OPTMIZE) $(LIBS) $(OBJS2) -o $(APPNAME2)
 
 clean:
-	rm -f $(APPNAME1) $(APPNAME2) $(OUTPUTFILE1) $(OUTPUTFILE2)
+	rm -f $(APPNAME1) $(APPNAME2) $(OUTPUTFILE1) $(OUTPUTFILE2) *.o
 
 run:
 	make

@@ -1,5 +1,5 @@
 /*
-*	Problema de Grafos
+*	Problema do Palíndromo
 *		Autor: Lucas Silvestre (2010054665)
 *		Data: 09/10/2012
 */
@@ -7,8 +7,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "funcoes.h"
-
-#define MAX_CARACTERES 5001
 
 int main(int argc, char *argv[]) {
 	// Declara as variáveis
