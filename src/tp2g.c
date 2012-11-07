@@ -6,16 +6,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "funcoes.h"
 
-inline int max(int a, int b) {
-	return a >= b ? a : b;
-}
+
 
 int main(int argc, char *argv[]) {
 	// Declara as variáveis
 	char * inputFileName = argv[1];
 	char * outputFileName = argv[2];
+	char * testFileName = "tempos2.txt";
 	int numPalavras, i, j, k, l, length;
 	char palavra[5001];
 	
@@ -31,15 +31,29 @@ int main(int argc, char *argv[]) {
 		printf("Nao foi possivel abrir o arquivo.\n");
 	}
 
+	// Abrir arquivo de testes
+	FILE * testFileOpen;
+	if ((testFileOpen = fopen(testFileName, "w")) == NULL) {
+		printf("Nao foi possivel abrir o arquivo.\n");
+	}
+
 	// Lê o número de instâncias
 	fscanf(inputFileOpen, "%d", &numPalavras);
 
-	for(i = 0; i < numPalavras; i++) {
-		// Lê a palavra
-		fscanf(inputFileOpen, "%s", palavra);
+	for (j = 10; j < 101; j+=10)
+	{
+		clock_t start = clock();
 		
-		fprintf(outputFileOpen, "%d\n", prog_gul(palavra));
-		
+		/* code */
+		for(i = 0; i < j; i++) {
+			// Lê a palavra
+			fscanf(inputFileOpen, "%s", palavra);
+			
+			fprintf(outputFileOpen, "%d\n", prog_gul(palavra));
+			
+		}
+
+		fprintf(testFileOpen, "%f\n", ((double)clock() - start) / CLOCKS_PER_SEC);
 	}
 
 
@@ -49,7 +63,11 @@ int main(int argc, char *argv[]) {
 	}
 
 	if(fclose(outputFileOpen) != 0) {
-		printf("Erro ao tentar fechar o arquivo %s\n", inputFileName);
+		printf("Erro ao tentar fechar o arquivo %s\n", outputFileName);
+	}
+
+	if(fclose(testFileOpen) != 0) {
+		printf("Erro ao tentar fechar o arquivo %s\n", testFileName);
 	}
 
 	return 0;
